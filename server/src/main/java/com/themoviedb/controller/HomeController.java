@@ -18,13 +18,17 @@ public class HomeController {
     private HomeService homeService;
 
     @GetMapping()
-    public ResponseEntity getListMovie() {
+    public ResponseEntity<CustomResponse> getListMovie() {
         List<MovieCustomMapping> movies = homeService.getListMovieService();
+
         if (movies.isEmpty()) {
-            return new ResponseEntity("No data found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CustomResponse("No data found"), HttpStatus.NOT_FOUND);
         }
 
-        return ResponseEntity.ok(movies);
+        return ResponseEntity.ok(new CustomResponse(movies));
+    }
+
+    record CustomResponse(Object results) {
     }
 
 

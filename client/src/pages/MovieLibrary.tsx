@@ -1,4 +1,4 @@
-import { useQuery, listNowPlayingMovies, getImagePrefixURL, Poster } from ".";
+import {listNowPlayingMovies, Poster, useQuery} from ".";
 
 export default function MovieLibrary() {
   const { isLoading, data } = useQuery(["movies"], () =>
@@ -13,7 +13,7 @@ export default function MovieLibrary() {
             <div className="shadow-lg h-auto transition ease-in-out rounded-md hover:scale-105 hover:cursor-pointer hover:shadow-2xl">
               <Poster
                 key={key}
-                imageUrl={getImagePrefixURL() + result.poster_path}
+                imageUrl={"https://image.tmdb.org/t/p/original//" + result.poster_path}
               />
             </div>
           ))}
