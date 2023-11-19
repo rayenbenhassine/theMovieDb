@@ -6,22 +6,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.themoviedb.entity.Movie;
 import com.themoviedb.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class SynchronizeService {
+public class SynchronizeMoviesService {
+
     private MovieRepository movieRepository;
+    @Value("${api.url}" + "/now_playing?" + "api_key=" + "${api.key}")
+    private String nowPlayingApi;
 
     @Autowired
-    public SynchronizeService(MovieRepository movieRepository) {
+    public SynchronizeMoviesService(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
 
     public void insertMoviesFromApi() {
-        String apiUrl = "https://api.themoviedb.org/3/movie/now_playing?api_key=1f39c937c2cfbeeb721a86724edb0283";
         RestTemplate restTemplate = new RestTemplate();
-        String jsonString = restTemplate.getForObject(apiUrl, String.class);
+        String jsonString = restTemplate.getForObject(nowPlayingApi, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 

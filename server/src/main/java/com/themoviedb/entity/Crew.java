@@ -8,17 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Actor {
+public class Crew {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String character;
     private String profilePath;
-
+    private String job;
     @ManyToOne
     @JoinColumn(name = "movie_id")
     @JsonIgnoreProperties("actors")
     private Movie movie;
-
 }

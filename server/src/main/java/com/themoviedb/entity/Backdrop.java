@@ -1,5 +1,6 @@
 package com.themoviedb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,19 +8,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Backdrop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double aspectRatio;
-    private Integer height;
-    private Integer width;
     private String filePath;
-    private Double voteAverage;
-    private Integer voteCount;
+
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonIgnoreProperties("actors")
     private Movie movie;
 
 }
