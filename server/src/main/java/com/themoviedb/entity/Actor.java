@@ -1,5 +1,7 @@
 package com.themoviedb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,12 +16,11 @@ public class Actor {
     private String name;
     private String character;
     private String profilePath;
-    private Boolean adult;
-    private Integer gender;
-    private String knownForDepartment;
 
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonIgnoreProperties("actors")
+
     private Movie movie;
 
 }
