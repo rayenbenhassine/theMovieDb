@@ -9,16 +9,16 @@ import lombok.Setter;
 @Setter
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class Backdrop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String filePath;
 
-
     @ManyToOne
     @JoinColumn(name = "movie_id")
     @JsonIgnoreProperties("actors")
-    private Movie movie;
 
+    private Movie movie;
 }

@@ -25,6 +25,7 @@ public class HomeService {
     @Autowired
     private ImageRepository imageRepository;
 
+
     public List<MovieCustomMapping> getListMovieService() {
         return movieRepository.findMovies();
     }
@@ -44,6 +45,4 @@ public class HomeService {
     public List<ImageCustomMapping> getListImageService(Long id) {
         return imageRepository.getImagesByMovie(id);
     }
-
-
 }

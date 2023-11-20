@@ -1,5 +1,6 @@
 package com.themoviedb.controller;
 
+
 import com.themoviedb.service.SynchronizeActorsService;
 import com.themoviedb.service.SynchronizeImagesService;
 import com.themoviedb.service.SynchronizeMoviesService;
@@ -36,5 +37,4 @@ public class AdminController {
         synchronizeImagesService.insertImagesFromApi();
         return ResponseEntity.ok("Images added to database");
     }
-
 }
