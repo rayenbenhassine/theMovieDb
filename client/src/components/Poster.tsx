@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
+
 type Props = {
+  movieId: number;
   imageUrl: string;
 };
 
-export default function Poster({ imageUrl }: Props) {
-    return (
-        <div
-            className="shadow-lg h-auto transition ease-in-out rounded-md hover:scale-105 hover:cursor-pointer hover:shadow-2xl">
-            <img className="rounded-md object-cover" src={imageUrl} alt="image"/>
-        </div>
-    )
-
+export default function Poster({ movieId, imageUrl }: Props) {
+  return (
+    <Link to={`/movie/${movieId}`}>
+      <img className="rounded-md object-cover" src={imageUrl} alt="image" />;
+    </Link>
+  );
 }
