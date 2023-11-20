@@ -8,17 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-
-public class Backdrop {
+public class Crew {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String filePath;
-
+    private String name;
+    private String profilePath;
+    private String job;
     @ManyToOne
     @JoinColumn(name = "movie_id")
     @JsonIgnoreProperties("actors")
-
     private Movie movie;
 }
