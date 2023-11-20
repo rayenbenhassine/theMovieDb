@@ -1,10 +1,8 @@
 package com.themoviedb.service;
 
+import com.themoviedb.entity.Genre;
 import com.themoviedb.entity.Movie;
-import com.themoviedb.repository.ActorRepository;
-import com.themoviedb.repository.CrewRepository;
-import com.themoviedb.repository.ImageRepository;
-import com.themoviedb.repository.MovieRepository;
+import com.themoviedb.repository.*;
 import com.themoviedb.response.ActorCustomMapping;
 import com.themoviedb.response.CrewCustomMapping;
 import com.themoviedb.response.ImageCustomMapping;
@@ -24,6 +22,8 @@ public class HomeService {
     private CrewRepository crewRepository;
     @Autowired
     private ImageRepository imageRepository;
+    @Autowired
+    private GenreRepository genreRepository;
 
 
     public List<MovieCustomMapping> getListMovieService() {
@@ -44,5 +44,9 @@ public class HomeService {
 
     public List<ImageCustomMapping> getListImageService(Long id) {
         return imageRepository.getImagesByMovie(id);
+    }
+
+    public List<Genre> getListGenres(Long id) {
+        return genreRepository.getGenresById(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.themoviedb.controller;
 
+import com.themoviedb.entity.Genre;
 import com.themoviedb.entity.Movie;
 import com.themoviedb.response.ActorCustomMapping;
 import com.themoviedb.response.CrewCustomMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
@@ -23,6 +25,7 @@ public class HomeController {
 
     @GetMapping("movie/{id}")
     public ResponseEntity getListActorsByMovie(@PathVariable Long id) {
+        List<Genre> genres = homeService.getListGenres(id);
         Movie movie = homeService.getMovieService(id);
         List<ActorCustomMapping> actors = homeService.getListActorService(id);
         List<CrewCustomMapping> crews = homeService.getListCrewService(id);
