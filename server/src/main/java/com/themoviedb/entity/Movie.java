@@ -23,6 +23,7 @@ public class Movie {
     private Double popularity;
     private String originalLanguage;
     private String posterPath;
+    private String backdropPath;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore

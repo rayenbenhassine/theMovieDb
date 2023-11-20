@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 @Component
 public class SynchronizeMoviesService {
 
@@ -39,9 +43,14 @@ public class SynchronizeMoviesService {
                 movie.setTitle(movieNode.get("title").asText());
                 movie.setPosterPath(movieNode.get("poster_path").asText());
                 movie.setOverview(movieNode.get("overview").asText());
-                movie.setReleaseDate(movieNode.get("release_date").asText());
+                LocalDate date = LocalDate.parse(movieNode.get("release_date").asText());
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.FRENCH);
+                String formattedDate = date.format(formatter);
+                movie.setReleaseDate(formattedDate);
                 movie.setPopularity(movieNode.get("popularity").asDouble());
                 movie.setOriginalLanguage(movieNode.get("original_language").asText());
+                movie.setBackdropPath(movieNode.get("backdrop_path").asText());
+
 
                 movieRepository.save(movie);
             }
