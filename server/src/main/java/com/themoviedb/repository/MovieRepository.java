@@ -12,7 +12,6 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     @Query(value = "select id, title, poster_path as posterPath from Movie", nativeQuery = true)
     List<MovieCustomMapping> findMovies();
-
     @Query(value = "select id from Movie", nativeQuery = true)
     List<Long> findIds();
 }
