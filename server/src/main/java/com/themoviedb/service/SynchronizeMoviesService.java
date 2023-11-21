@@ -3,7 +3,9 @@ package com.themoviedb.service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.themoviedb.entity.Genre;
 import com.themoviedb.entity.Movie;
+import com.themoviedb.repository.GenreRepository;
 import com.themoviedb.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,8 +20,12 @@ import java.util.Locale;
 public class SynchronizeMoviesService {
 
     private MovieRepository movieRepository;
+    @Autowired
+    private GenreRepository genreRepository;
     @Value("${api.url}" + "/now_playing?" + "api_key=" + "${api.key}")
     private String nowPlayingApi;
+    @Value("https://api.themoviedb.org/3" + "/genre/movie/list?" + "api_key=" + "${api.key}")
+    private String genresApi;
 
     @Autowired
     public SynchronizeMoviesService(MovieRepository movieRepository) {
@@ -28,8 +34,29 @@ public class SynchronizeMoviesService {
 
     public void insertMoviesFromApi() {
         RestTemplate restTemplate = new RestTemplate();
-        String jsonString = restTemplate.getForObject(nowPlayingApi, String.class);
+        String jsonString = restTemplate.getForObject(genresApi, String.class);
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            JsonNode resultsNode = jsonNode.get("genres");
+
+            for (JsonNode movieNode : resultsNode) {
+                Genre genre = new Genre();
+                genre.setId(movieNode.get("id").asLong());
+                genre.setName(movieNode.get("name").asText());
+
+                genreRepository.save(genre);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        jsonString = restTemplate.getForObject(nowPlayingApi, String.class);
+        objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         try {
@@ -51,6 +78,16 @@ public class SynchronizeMoviesService {
                 movie.setOriginalLanguage(movieNode.get("original_language").asText());
                 movie.setBackdropPath(movieNode.get("backdrop_path").asText());
 
+                JsonNode genreIdsNode = movieNode.get("genre_ids");
+                if (genreIdsNode != null && genreIdsNode.isArray()) {
+                    for (JsonNode genreIdNode : genreIdsNode) {
+                        Long genreId = genreIdNode.asLong();
+                        Genre genre = genreRepository.findById(genreId).orElse(null);
+                        if (genre != null) {
+                            movie.getGenres().add(genre);
+                        }
+                    }
+                }
 
                 movieRepository.save(movie);
             }

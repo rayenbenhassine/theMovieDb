@@ -1,11 +1,2 @@
-export const getApiPrefixURL = () => {
-  return import.meta.env.VITE_REACT_API_URL;
-};
-
-export const getImagePrefixURL = () => {
-  return import.meta.env.VITE_REACT_IMAGE_URL;
-};
-
-export const getAccessToken = () => {
-  return import.meta.env.VITE_REACT_ACCESS_TOKEN;
-};
+export const API_URL: string = import.meta.env.VITE_REACT_API_URL;
+export const IMAGE_URL: string = import.meta.env.VITE_REACT_IMAGE_URL;

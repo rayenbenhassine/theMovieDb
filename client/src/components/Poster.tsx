@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link } from ".";
 
-type Props = {
+interface Props {
   movieId: number;
   imageUrl: string;
-};
+}
 
 export default function Poster({ movieId, imageUrl }: Props) {
   return (
