@@ -14,11 +14,11 @@ export default function MovieDetails({
   releaseDate,
 }: Props) {
   return (
-    <section className="flex items-end gap-2">
+    <section className="flex flex-col sm:flex-row sm:items-end gap-2">
       <img
         src={imageUrl}
         alt="poster"
-        className="rounded-md object-cover"
+        className="rounded-md object-cover m-auto"
         width={300}
       />
       <div>
