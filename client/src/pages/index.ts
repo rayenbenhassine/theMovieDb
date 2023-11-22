@@ -1,6 +1,26 @@
 import { useQuery } from "react-query";
-import { getImagePrefixURL } from "../utils/env";
+import { IMAGE_URL } from "../utils/env";
 import Poster from "../components/Poster";
 import { listNowPlayingMovies } from "../services/movies.services";
+import { nowPlayingMovie } from "../types/nowPlayingMovie";
 
-export { useQuery, listNowPlayingMovies, getImagePrefixURL, Poster };
+import { useParams } from "react-router-dom";
+import { getMovie } from "../services/movies.services";
+import BackButton from "../components/BackButton";
+import MovieDetails from "../components/MovieDetails";
+import Credits from "../components/Credits";
+import Images from "../components/Images";
+
+export {
+  useQuery,
+  listNowPlayingMovies,
+  IMAGE_URL,
+  Poster,
+  useParams,
+  getMovie,
+  BackButton,
+  MovieDetails,
+  Credits,
+  Images,
+};
+export type { nowPlayingMovie };
