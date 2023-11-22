@@ -11,7 +11,7 @@ import MovieDetails from "../components/MovieDetails";
 import Credits from "../components/Credits";
 import Images from "../components/Images";
 import { useState, useEffect, useMemo } from "react";
-import Skeleton from "../components/skeleton";
+import Skeleton from "../components/Skeleton";
 
 export {
   useQuery,
