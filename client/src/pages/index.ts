@@ -10,6 +10,8 @@ import BackButton from "../components/BackButton";
 import MovieDetails from "../components/MovieDetails";
 import Credits from "../components/Credits";
 import Images from "../components/Images";
+import { useState, useEffect, useMemo } from "react";
+import Skeleton from "../components/skeleton";
 
 export {
   useQuery,
@@ -22,5 +24,9 @@ export {
   MovieDetails,
   Credits,
   Images,
+  useState,
+  useEffect,
+  useMemo,
+  Skeleton,
 };
 export type { nowPlayingMovie };
