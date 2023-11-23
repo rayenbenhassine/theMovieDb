@@ -13,7 +13,6 @@ export default function Poster({ movieId, imageUrl }: Props) {
         src={imageUrl}
         alt="image"
       />
-      ;
     </Link>
   );
 }
