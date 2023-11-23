@@ -46,10 +46,10 @@ export default function MovieLibrary() {
   return (
     <div className="flex flex-col gap-6 p-12">
       <div className="flex justify-between flex-col sm:flex-row">
-        <h1 className="text-white text-4xl">🎬🍿 Movie library</h1>
+        <h1 className="dark:text-white text-4xl">🎬🍿 Movie library</h1>
         <input
           type="text"
-          className="pl-4 rounded-full min-w-full sm:min-w-[20rem]  dark:bg-gray-700 m-4 sm:m-0"
+          className="pl-4 rounded-full min-w-full sm:min-w-[20rem] dark:bg-gray-700 m-4 sm:m-0"
           onChange={filterMovies}
           placeholder="🔎 Search for movie"
         />
